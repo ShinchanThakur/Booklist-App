@@ -37,12 +37,9 @@ class UI {
         isbn.value = '';
     }
 
-    static deleteBook(deleteElement) {
-        if (deleteElement.classList.contains('delete')) {
-            const tdElement = deleteElement.parentElement;
-            const trElement = tdElement.parentElement;
-            trElement.remove();
-        }
+    static deleteBook(tdElement) {
+        const trElement = tdElement.parentElement;
+        trElement.remove();
     }
 
     static showAlert(message, className) {
@@ -118,6 +115,12 @@ function addBook(e) {
 const bookList = document.getElementById('book-list');
 bookList.addEventListener('click', deleteBook);
 function deleteBook(e) {
-    UI.deleteBook(e.target);
-    UI.showAlert('Book removed', 'success');
+    const deleteElement = e.target;
+    if (deleteElement.classList.contains('delete')) {
+        const tdElement = deleteElement.parentElement;
+        UI.deleteBook(tdElement);
+        const isbnElement = tdElement.previousElementSibling;
+        Store.removeBook(isbnElement.textContent);
+        UI.showAlert('Book removed', 'success');
+    }
 }
