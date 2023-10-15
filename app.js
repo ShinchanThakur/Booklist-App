@@ -60,6 +60,20 @@ class UI {
             trElement.remove();
         }
     }
+
+    static showAlert(message, className) {
+        const div = document.createElement('div');
+        div.className = `alert alert-${className}`;
+        const messageText = document.createTextNode(message);
+        div.appendChild(messageText);
+
+        const container = document.querySelector('.container');
+        const form = document.getElementById('book-form');
+        container.insertBefore(div, form);
+
+        setTimeout(() => document.querySelector('.alert').remove(),
+            3000);
+    }
 }
 
 // Store Class: Handles Storage
@@ -76,10 +90,11 @@ function addBook(e) {
     const isbn = document.getElementById('isbn').value;
 
     if (title === '' || author === '' || isbn === '')
-        alert('Please fill in all fields');
+        UI.showAlert('Please fill in all fields', 'danger');
     else {
         const book = new Book(title, author, isbn);
         UI.addBookToList(book);
+        UI.showAlert('Book added', 'success');
         UI.clearFields();
     }
 }
@@ -89,4 +104,5 @@ const bookList = document.getElementById('book-list');
 bookList.addEventListener('click', deleteBook);
 function deleteBook(e) {
     UI.deleteBook(e.target);
+    UI.showAlert('Book removed', 'success');
 }
