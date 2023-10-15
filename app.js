@@ -75,9 +75,13 @@ function addBook(e) {
     const author = document.getElementById('author').value;
     const isbn = document.getElementById('isbn').value;
 
-    const book = new Book(title, author, isbn);
-    UI.addBookToList(book);
-    UI.clearFields();
+    if (title === '' || author === '' || isbn === '')
+        alert('Please fill in all fields');
+    else {
+        const book = new Book(title, author, isbn);
+        UI.addBookToList(book);
+        UI.clearFields();
+    }
 }
 
 // Event: Remove a book
