@@ -30,6 +30,18 @@ class UI {
         const books = StoredBooks;
         books.forEach((book) => UI.addBookToList(book));
     }
+
+    static addBookToList(book) {
+        var bookList = document.getElementById('book-list');
+        var row = document.createElement('tr');
+        row.innerHTML = `
+                <td>${book.title}</td>
+                <td>${book.author}</td>
+                <td>${book.isbn}</td>
+                <td><a href="#" class="btn btn-sm btn-danger delete">X</a></td>
+            `;
+        bookList.appendChild(row);
+    }
 }
 
 // Store Class: Handles Storage
