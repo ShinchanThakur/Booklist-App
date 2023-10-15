@@ -49,4 +49,16 @@ class UI {
 document.addEventListener('DOMContentLoaded', UI.displayBooks);
 
 // Event: Add a book
+var form = document.getElementById('book-form');
+form.addEventListener('submit', addBook);
+function addBook(e) {
+    e.preventDefault();
+    const title = document.getElementById('title').value;
+    const author = document.getElementById('author').value;
+    const isbn = document.getElementById('isbn').value;
+
+    const book = new Book(title, author, isbn);
+    UI.addBookToList(book);
+}
+
 // Event: Remove a book
