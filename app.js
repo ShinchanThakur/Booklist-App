@@ -42,6 +42,16 @@ class UI {
             `;
         bookList.appendChild(row);
     }
+
+    static clearFields() {
+        const title = document.getElementById('title');
+        const author = document.getElementById('author');
+        const isbn = document.getElementById('isbn');
+
+        title.value = '';
+        author.value = '';
+        isbn.value = '';
+    }
 }
 
 // Store Class: Handles Storage
@@ -59,6 +69,7 @@ function addBook(e) {
 
     const book = new Book(title, author, isbn);
     UI.addBookToList(book);
+    UI.clearFields();
 }
 
 // Event: Remove a book
