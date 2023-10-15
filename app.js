@@ -52,6 +52,14 @@ class UI {
         author.value = '';
         isbn.value = '';
     }
+
+    static deleteBook(deleteElement) {
+        if (deleteElement.classList.contains('delete')) {
+            const tdElement = deleteElement.parentElement;
+            const trElement = tdElement.parentElement;
+            trElement.remove();
+        }
+    }
 }
 
 // Store Class: Handles Storage
@@ -59,7 +67,7 @@ class UI {
 document.addEventListener('DOMContentLoaded', UI.displayBooks);
 
 // Event: Add a book
-var form = document.getElementById('book-form');
+const form = document.getElementById('book-form');
 form.addEventListener('submit', addBook);
 function addBook(e) {
     e.preventDefault();
@@ -73,3 +81,8 @@ function addBook(e) {
 }
 
 // Event: Remove a book
+const bookList = document.getElementById('book-list');
+bookList.addEventListener('click', deleteBook);
+function deleteBook(e) {
+    UI.deleteBook(e.target);
+}
