@@ -77,6 +77,19 @@ class UI {
 }
 
 // Store Class: Handles Storage
+class Store {
+    static getBooks() {
+        let books;
+        const localStorageBooks = localStorage.getItem('books');
+        if (localStorageBooks === null)
+            books = [];
+        else
+            books = JSON.parse(localStorageBooks);
+
+        return books;
+    }
+}
+
 // Event: Display books
 document.addEventListener('DOMContentLoaded', UI.displayBooks);
 
